@@ -123,21 +123,56 @@ margin-bottom:30px;
 
 .service-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(6, 1fr);
 gap:30px;
+margin-top:60px;
 }
 
 .service-card{
+grid-column:span 2;
 background:white;
-padding:30px;
-border-radius:6px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
+padding:35px;
+border-radius:8px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 transition:.3s;
+text-align:center;
 }
 
 .service-card:hover{
-transform:translateY(-10px);
+transform:translateY(-8px);
 }
+
+/* When there are exactly 5 cards, make cards 4 and 5 wider */
+.service-grid .service-card:nth-child(4):nth-last-child(2),
+.service-grid .service-card:nth-child(5):nth-last-child(1){
+grid-column:span 3;
+}
+
+@media (max-width:900px){
+  .service-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+  .service-card,
+  .service-grid .service-card:nth-child(4):nth-last-child(2),
+  .service-grid .service-card:nth-child(5):nth-last-child(1){
+    grid-column:span 1;
+  }
+}
+
+@media (max-width:600px){
+  .service-grid{
+    grid-template-columns:1fr;
+  }
+
+  .service-card,
+  .service-grid .service-card:nth-child(4):nth-last-child(2),
+  .service-grid .service-card:nth-child(5):nth-last-child(1){
+    grid-column:span 1;
+  }
+}
+
+
 
 /* GALLERY */
 
