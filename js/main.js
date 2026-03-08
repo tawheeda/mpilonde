@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
     if (loader) {
       loader.style.display = "none";
     }
-  }, 1200);
+  }, 200);
 });
 
 /* SMOOTH SCROLL */
@@ -106,3 +106,4 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight") showNext();
   if (e.key === "ArrowLeft") showPrev();
 });
+
