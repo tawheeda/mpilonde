@@ -23,11 +23,9 @@ align-items:center;
 z-index:9999;
 }
 
-.loader-text{
-color:white;
-font-size:40px;
-letter-spacing:8px;
-font-family:Playfair Display;
+/* Loader logo */
+.loader-logo{
+width:120px;
 animation:fade 2s infinite;
 }
 
@@ -36,6 +34,7 @@ animation:fade 2s infinite;
 50%{opacity:1}
 100%{opacity:.3}
 }
+
 
 /* NAVBAR */
 
@@ -50,36 +49,45 @@ backdrop-filter:blur(10px);
 .nav-container{
 display:flex;
 justify-content:space-between;
+align-items:center;
 padding:20px 10%;
+}
+
+/* Navbar logo */
+.logo img{
+height:45px;
+width:auto;
 }
 
 nav a{
 margin-left:20px;
 text-decoration:none;
 color:#333;
+font-family:Playfair Display;
 }
 
 nav a:hover{
-color:#c9a76a;
+color:#F25800;
 }
+
 
 /* HERO */
 
 .hero{
-  height:100vh;
-  background: url('../capture/venue/hero.jpeg') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
+height:100vh;
+background:url('../capture/venue/hero.jpeg') center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
 }
 
 .hero-overlay{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.35);
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.35);
 }
 
 .hero-content{
@@ -100,11 +108,12 @@ font-size:20px;
 .btn{
 display:inline-block;
 margin-top:20px;
-background:#c9a76a;
+background:#F25800;
 padding:12px 28px;
 color:white;
 text-decoration:none;
 }
+
 
 /* SECTIONS */
 
@@ -338,7 +347,7 @@ margin-bottom:8px;
 }
 
 .footer-links a:hover{
-color:#c9a76a;
+color:#F25800;
 }
 
 .footer-bottom{
@@ -353,7 +362,7 @@ font-size:14px;
 }
 
 .footer-bottom a{
-color:#c9a76a;
+color:#F25800;
 text-decoration:none;
 }
 
