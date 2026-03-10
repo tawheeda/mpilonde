@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
     if (loader) {
       loader.style.display = "none";
     }
-  }, 200);
+  }, 300);
 });
 
 /* SMOOTH SCROLL */
@@ -20,8 +20,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/* GALLERY TILES + LIGHTBOX */
-const tiles = document.querySelectorAll(".gallery-tile");
+
+const triggers = document.querySelectorAll(".gallery-trigger");
 const sections = document.querySelectorAll(".gallery-section");
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
@@ -32,19 +32,96 @@ const closeBtn = document.querySelector(".close");
 let currentImages = [];
 let currentIndex = 0;
 
-tiles.forEach(tile => {
-  tile.addEventListener("click", () => {
-    const target = tile.getAttribute("data-target");
+/* hide all galleries first */
+sections.forEach(section => section.classList.remove("active"));
 
-    tiles.forEach(t => t.classList.remove("active"));
-    tile.classList.add("active");
+/* service card click with toggle open/close */
+triggers.forEach(trigger => {
+  trigger.addEventListener("click", () => {
+    const target = trigger.getAttribute("data-target");
+    const targetSection = document.getElementById(target);
+    const isAlreadyActive = trigger.classList.contains("active");
 
-    sections.forEach(section => {
-      section.classList.toggle("active", section.id === target);
+    /* reset everything */
+    triggers.forEach(t => t.classList.remove("active"));
+    sections.forEach(section => section.classList.remove("active"));
+
+    /* if clicked card was not already open, open it */
+    if (!isAlreadyActive && targetSection) {
+      trigger.classList.add("active");
+      targetSection.classList.add("active");
+
+      targetSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  });
+});
+
+function openLightbox(images, index) {
+  currentImages = Array.from(images);
+  currentIndex = index;
+  lightboxImg.src = currentImages[currentIndex].src;
+  lightbox.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function showNext() {
+  if (!currentImages.length) return;
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  lightboxImg.src = currentImages[currentIndex].src;
+}
+
+function showPrev() {
+  if (!currentImages.length) return;
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  lightboxImg.src = currentImages[currentIndex].src;
+}
+
+sections.forEach(section => {
+  const images = section.querySelectorAll(".gallery-img");
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      openLightbox(images, index);
     });
   });
 });
 
+if (closeBtn) {
+  closeBtn.addEventListener("click", closeLightbox);
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener("click", showNext);
+}
+
+if (prevBtn) {
+  prevBtn.addEventListener("click", showPrev);
+}
+
+if (lightbox) {
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+}
+
+document.addEventListener("keydown", e => {
+  if (!lightbox || !lightbox.classList.contains("show")) return;
+
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") showNext();
+  if (e.key === "ArrowLeft") showPrev();
+});
+
+/* lightbox */
 function openLightbox(images, index) {
   currentImages = Array.from(images);
   currentIndex = index;

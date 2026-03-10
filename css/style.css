@@ -183,33 +183,36 @@ grid-column:span 3;
 
 
 
-/* GALLERY */
-.gallery-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+/* SERVICE CARDS AS GALLERY TABS */
+.service-gallery-nav {
+  margin-top: 2rem;
 }
 
-.gallery-tile {
+.gallery-trigger {
   border: none;
-  padding: 1.2rem 1rem;
-  border-radius: 14px;
+  text-align: center;
+  background: #fff;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.gallery-trigger:hover {
+  transform: translateY(-4px);
+}
+
+.gallery-trigger.active {
   background: #111;
   color: #fff;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.gallery-tile:hover {
-  transform: translateY(-4px);
-  opacity: 0.9;
+.gallery-trigger.active h3,
+.gallery-trigger.active p {
+  color: #fff;
 }
 
-.gallery-tile.active {
-  background: #333;
+/* GALLERY */
+.service-gallery-wrap {
+  margin-top: 0;
 }
 
 .gallery-section {
@@ -243,6 +246,73 @@ grid-column:span 3;
 
 .gallery-img:hover {
   transform: scale(1.05);
+}
+
+.gallery-placeholder {
+  padding: 60px 20px;
+  border-radius: 12px;
+  background: #f5f5f5;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.lightbox.show {
+  display: flex;
+}
+
+#lightbox-img {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 12px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.lightbox-nav.prev {
+  left: 20px;
+}
+
+.lightbox-nav.next {
+  right: 20px;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* LIGHTBOX */
